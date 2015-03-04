@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{64F47A44-AE48-4624-8B2A-2725A9140B35}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "thebeebs.co.uk", "src\thebeebs.co.uk\thebeebs.co.uk.kproj", "{45E4A7EC-1D29-4591-8F0A-FF39AAE401E5}"

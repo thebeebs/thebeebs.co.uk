@@ -6,8 +6,7 @@ using Microsoft.Framework.DependencyInjection;
 namespace thebeebs.co.uk
 {
     public class Startup
-    {
-		public void ConfigureServices(IServiceCollection services)
+    {public void ConfigureServices(IServiceCollection services)
         {
 			services.AddMvc();
         }
@@ -16,9 +15,12 @@ namespace thebeebs.co.uk
         {
 			app.UseMvc(routes => routes.MapRoute(
 				"default",
-				"{controller}/{action}",
-				new { controller = "Home", action = "Index" }
-				));
+				"",
+				new { controller = "Home", action = "Index"}
+				).MapRoute("postname",
+				"{postname}",
+				new { controller = "Home", action = "Page" })				
+				);
         }
     }
 }

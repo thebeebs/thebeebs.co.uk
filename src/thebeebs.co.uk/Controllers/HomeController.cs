@@ -11,5 +11,12 @@ namespace thebeebs.co.uk.Controllers
         {
             return View();
         }
-    }
+
+		public IActionResult Page(string postname)
+		{
+			var page = new Page();
+			page.Title = postname;
+			return View(page);
+		}
+	}
 }
