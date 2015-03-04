@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
+using thebeebs.co.uk.Model;
 
 namespace thebeebs.co.uk
 {
@@ -9,7 +10,8 @@ namespace thebeebs.co.uk
     {public void ConfigureServices(IServiceCollection services)
         {
 			services.AddMvc();
-        }
+			services.AddTransient<IPageService, HardCodedPageService>();
+		}
 
         public void Configure(IApplicationBuilder app)
         {
