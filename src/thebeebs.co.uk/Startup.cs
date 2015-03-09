@@ -10,7 +10,7 @@ namespace thebeebs.co.uk
     {public void ConfigureServices(IServiceCollection services)
         {
 			services.AddMvc();
-			services.AddTransient<IPageService, HardCodedPageService>();
+			services.AddTransient<IPageService, PageServiceTableStorage>();
 		}
 
         public void Configure(IApplicationBuilder app)
