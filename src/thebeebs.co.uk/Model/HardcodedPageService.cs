@@ -24,6 +24,7 @@ namespace thebeebs.co.uk.Model
 
 		public Page GetBySlug(string slug)
 		{
+
 			var creds = new StorageCredentials(AzureConfiguration.StorageName, AzureConfiguration.StorageKey);
 			CloudStorageAccount storageAccount = new CloudStorageAccount(creds, true);
 
@@ -37,13 +38,13 @@ namespace thebeebs.co.uk.Model
 			var retrievedResult = table.ExecuteAsync(retrieveOperation);
 
 			// Print the phone number of the result.
-			if (retrievedResult.Result != null)
+			if (retrievedResult.Result.Result != null)
 				return new Page {
 					Title = ((BlogEntity)retrievedResult.Result.Result).RowKey,
 					Content = ((BlogEntity)retrievedResult.Result.Result).Content
 				};
 			else
-				return new Page { Title = "slug" };
+				return new Page { Title = "slug", Content= "404" };
 
 
 		}
