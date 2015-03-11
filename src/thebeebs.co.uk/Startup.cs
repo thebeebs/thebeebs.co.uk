@@ -9,12 +9,17 @@ namespace thebeebs.co.uk
     public class Startup
     {public void ConfigureServices(IServiceCollection services)
         {
+
+			
 			services.AddMvc();
 			services.AddTransient<IPageService, PageServiceTableStorage>();
 		}
 
         public void Configure(IApplicationBuilder app)
         {
+			// Add static files to the request pipeline.
+			app.UseStaticFiles();
+
 			app.UseMvc(routes => routes.MapRoute(
 				"default",
 				"",
