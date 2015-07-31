@@ -1,7 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Table;
-using SharedConfiguration;
 
 namespace thebeebs.co.uk.Model
 {
@@ -25,7 +24,7 @@ namespace thebeebs.co.uk.Model
 		public Page GetBySlug(string slug)
 		{
 
-			var creds = new StorageCredentials(AzureConfiguration.StorageName, AzureConfiguration.StorageKey);
+			var creds = new StorageCredentials("");
 			CloudStorageAccount storageAccount = new CloudStorageAccount(creds, true);
 
 			TableOperation retrieveOperation = TableOperation.Retrieve<BlogEntity>("Blog", slug);

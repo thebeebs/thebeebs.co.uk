@@ -1,12 +1,10 @@
-﻿using thebeebs.co.uk.Model;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Microsoft.AspNet.Mvc;
+using thebeebs.co.uk.Model;
 
 namespace thebeebs.co.uk.Controllers
 {
     public class HomeController : Controller
     {
-		[Activate]
 		public IPageService PageService { get; set; }
 
 		// GET: /<controller>/
