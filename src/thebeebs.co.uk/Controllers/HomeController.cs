@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
-using thebeebs.co.uk.Model;
+﻿using thebeebs.co.uk.Model;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
