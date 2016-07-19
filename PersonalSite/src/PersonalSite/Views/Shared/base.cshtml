@@ -16,13 +16,13 @@
 
 <body class="home blog no-js single-content-tutorials">	
 	<header id="top" role="banner">
-		<nav class="menu-top-nav-wrap">
+       		<nav class="menu-top-nav-wrap">
 			<ul id="menu-top-nav" class="menu wrap">
 				<li id="menu-item-19921" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-19921"><a href="~/">Home</a></li>
-				<li id="menu-item-19911" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19911"><a href="~/category/web/">Web</a></li>
-				<li id="menu-item-19931" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19931"><a href="~/category/events">Events</a></li>
+         		@await Component.InvokeAsync("CategoryMenu");
 			</ul>
-		</nav>	<div id="branding" class="wrap">
+		</nav>	
+    <div id="branding" class="wrap">
 			<a id="site-title" href="~/">Ubelly</a>
 			<div id="site-search">
 				<form action="~/" id="searchform" method="get" role="search">
@@ -39,12 +39,7 @@
 				<a id="about-us" href="~/about">About Me</a>
 			</div>
 		</div>
-		<nav class="wrap">
-			<ul id="menu-main-nav" class="menu wrap">
-				<li id="menu-item-20982" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20982"><a href="~/tag/video/">Videos</a></li>
-				<li id="menu-item-20991" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20991"><a href="~/speaking">Speaking</a></li>
-			</ul>
-		</nav>
+        @await Component.InvokeAsync("TypeMenu");        
 	</header><!--header-->
 	<div id="main" role="main">
 		<div class="wrap">
