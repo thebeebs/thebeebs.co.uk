@@ -1,12 +1,10 @@
 ﻿@model PersonalSite.ViewModels.ContentOverview
 
-<nav class="wrap">
-    <ul class="menu wrap" id="menu-main-nav">
+
         @foreach (var type in Model.Types)
         {
         <li class="@type.Symbol menu-item">
             <a href="/@type.Symbol/"><span class="icon"></span>@type.Name</a>
         </li>
         }
-    </ul>
-</nav>
+
