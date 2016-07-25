@@ -1,4 +1,15 @@
-﻿@media (min-width: 0px) and (max-width: 992px) { 
+﻿/*Hidding Search until it's switched back on.*/
+ #site-search {
+
+	display:none;
+
+}
+
+     .menu-hamburger {
+         display:none;
+    }
+
+@media (min-width: 0px) and (max-width: 992px) { 
     .wrap {
 	    display:block;
 	    width:100%; 
@@ -17,14 +28,12 @@
     .column-10, 
     .column-11, 
     .column-12 { 
-	    width:100%; 
+	    width:100%;
+        padding-top: 0px;
+        margin:0px;
     }
 
-    #site-search {
 
-	display:none;
-
-}
     .attachment-main {
     width:100%;
     }
@@ -37,5 +46,23 @@
     .menu-top-nav-wrap {
         display:none;
     }
+
+    #menu-main-nav {
+      display:none;
+    }
+
+    #top {
+	background: #333;
+	margin-bottom: 0;
+}
+    #top .critterwrap {
+
+	bottom: 0;
+}
+
+    #main{
+        padding-top:0;
+    }
+
 }
 

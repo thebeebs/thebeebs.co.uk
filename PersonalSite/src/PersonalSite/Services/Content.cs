@@ -18,11 +18,11 @@ namespace PersonalSite.Services
 
             //galleries,shorts,interviews,guestposts
             overview.Types = new List<ViewModels.Type>();
-            overview.Types.Add(new ViewModels.Type { Name = "News", Symbol = "news" });
-            overview.Types.Add(new ViewModels.Type { Name = "Galleries", Symbol = "galleries" });
+            overview.Types.Add(new ViewModels.Type { Name = "Opinion", Symbol = "news" });
+            overview.Types.Add(new ViewModels.Type { Name = "Video", Symbol = "galleries" });
             overview.Types.Add(new ViewModels.Type { Name = "Shorts", Symbol = "shorts" });
-            overview.Types.Add(new ViewModels.Type { Name = "Interviews", Symbol = "interviews" });
-            overview.Types.Add(new ViewModels.Type { Name = "Guestposts", Symbol = "guestposts" });
+            overview.Types.Add(new ViewModels.Type { Name = "Tutorials", Symbol = "interviews" });
+            overview.Types.Add(new ViewModels.Type { Name = "Speaking", Symbol = "guestposts" });
 
             return overview;
         }
