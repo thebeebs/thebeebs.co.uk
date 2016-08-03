@@ -9,6 +9,14 @@ namespace PersonalSite.ViewModels
     {       
         public List<Category> Categories { get; set; }
         public List<Type> Types { get; set; }
+
+        public Story Headline { get; set; }
+
+        public List <Story> Content { get; set; }
+
+        public List<Story> SecondaryHeadline { get; set; }
+
+        
     }
 
     public class Category {  

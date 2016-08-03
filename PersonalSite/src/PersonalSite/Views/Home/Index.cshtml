@@ -5,44 +5,57 @@
 
 	<div class="column-8">
 		<section id="trending">
-			<article id="post-20621" class="post-20621 post type-post status-publish format-standard has-post-thumbnail hentry category-apps-2 category-cloud category-mobile-2 tag-promoted number1 content-articles">
-				<figure><a href="~/why-imessgae-will-never-beat-whatsapp"><img width="644" height="300" src="~/wp-content/uploads/2014/11/phone.jpg" class="attachment-main wp-post-image" alt="phone" /></a></figure>
+			<article id="post-20621" class="post number1">
+				<figure>                
+                    <a href="@Model.Headline.Link">
+                    <img width="644" height="300" src="@Model.Headline.ImageUrl" 
+                         class="attachment-main wp-post-image" alt="phone" />                 
+                    </a>
+                </figure>
 				<div class="wrapper">
 					<div class="contentwrap">
-						<h2 class="entry-title"><div class="entry-icon"></div><a href="~/why-imessage-will-never-beat-whatsapp/" rel="bookmark">Why iMessage will never beat WhatsApp</a></h2>
+						<h2 class="entry-title">
+                            <span class="entry-icon"></span>
+                            <a href="@Model.Headline.Link" 
+                               rel="bookmark">@Model.Headline.Title</a>
+                        </h2>
 						<section class="post-meta">
 							<span class="entry-category">
-								<a href="~/category/apps-2/" rel="category tag">Apps</a> / <a href="~/category/cloud/" rel="category tag">Cloud</a> / <a href="~/category/mobile-2/" rel="category tag">Mobile</a>						<a href="~/articles/" rel="tag">Articles</a>
+                                @foreach (var cat in Model.Headline.Category)
+                                {
+                                    <a href="@cat.Name" rel="category tag">
+                                        @cat.Name
+                                    </a>
+                                }  
 							</span>
 							- Published
-							<time class="published" datetime="2014-11-27">3 months ago</time>
-							by <a class="author" href="~/author/" title="See 's Profile">thebeebs</a>
+							<time class="published" datetime="@Model.Headline.Published.ToUniversalTime()">@Model.Headline.RelativeTime()</time>
+							by 
+                            <a class="author" href="~/author/" title="See 's Profile">@Model.Headline.Author</a>
 						</section>
 						<section class="entry-summary">
-							Most of us have experienced some form of 'platform shut out' - when you want to share something with a friend but can't because they use a different device from you and the app isn't available on that device. This problem is particularly acute when it comes to messenger apps, but is common in many apps with sharing or collaboration functionality.
-
-							WhatsApp and iMessage illustrate the two approaches that native applications developers take. iMessage works...
+							@Model.Headline.Summary
 						</section>
 						<section class="entry-meta">
-							<ul class="sharelinks">
-								<li><a href="http://twitter.com/share" class="twitter-share-button" data-url="~/why-imessage-will-never-beat-whatsapp/" data-text="Why iMessage will never beat WhatsApp" data-via="thebeebs">Tweet this post</a></li>
-								<li><fb:like href="~/why-imessage-will-never-beat-whatsapp/" layout="button_count"></fb:like></li>
-							</ul>
-							<a class="commentcount" href="~/why-imessage-will-never-beat-whatsapp/#comments">0 <span class="screen-reader-text">Comments</span></a>
+						<a class="commentcount" href="~/why-imessage-will-never-beat-whatsapp/#comments">0 <span class="screen-reader-text">Comments</span></a>
 						</section>
 					</div>
 				</div>
 			</article>
 			<div class="clearfix"></div>
-			<article id="post-19567" class="post-19567 post type-post status-publish format-standard has-post-thumbnail hentry category-comment category-web tag-promoted number2 secondary content-articles">
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<h2 class="entry-title">
-						<a href="~/client-requests-through-the-years/" rel="bookmark">Client requests through the years</a>
-						<a class="commentcount" href="~/client-requests-through-the-years/#comments">0 <span class="screen-reader-text">Comments</span></a>
-					</h2>
-				</div>
-			</article>
+            @for (int i = 0; i < Model.SecondaryHeadline.Count; i++)
+            { var number = "number" + (i + 2);
+                <article id="post-19567" class="post-19567 post type-post status-publish format-standard has-post-thumbnail hentry category-comment category-web tag-promoted @number secondary content-articles">
+                    <div class="wrapper">
+                        <div class="entry-icon"></div>
+                        <h2 class="entry-title">
+                            <a href="@Model.SecondaryHeadline[i].Link" rel="bookmark">@Model.SecondaryHeadline[i].Title</a>
+                            <a class="commentcount" href="@Model.SecondaryHeadline[i].Link/#comments">@Model.SecondaryHeadline[i].CommentCount <span class="screen-reader-text">Comments</span></a>
+                        </h2>
+                    </div>
+                </article>
+
+            }
 			<article id="post-19160" class="post-19160 post type-post status-publish format-standard has-post-thumbnail hentry category-comment tag-promoted number3 secondary content-articles">
 				<div class="wrapper">
 					<div class="entry-icon"></div>
@@ -117,7 +130,11 @@
 	<div class="grid">
 
 		<div id="hfeed">
-			<article id="post-21781" class="post-21781 post type-post status-publish format-standard has-post-thumbnail hentry category-cloud number1 column-4 content-tutorials">
+        @for (int i = 0; i < Model.Content.Count; i++)
+        { var number = "number" + (i + 1);
+
+        
+			<article id="post-21781" class="post-21781 post type-post status-publish format-standard has-post-thumbnail hentry category-cloud @number column-4 content-tutorials">
 
 				<figure class="postthumbnail">
 					<a href="~/21781/"><img width="312" height="280" src="~/wp-content/uploads/2014/10/windows8-312x280.jpg" class="attachment-loop wp-post-image" alt="Windows 8" /></a>
@@ -143,232 +160,9 @@
 				</div>
 
 			</article><!-- #post-21781 -->
+        }
 
-
-			<article id="post-21741" class="post-21741 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized number2 column-4 content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/azure-70-532/"><img width="312" height="280" src="~/wp-content/uploads/2013/11/keyboard-312x280.jpg" class="attachment-loop wp-post-image" alt="keyboard" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/azure-70-532/" rel="bookmark">Azure 70-532</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/uncategorized/" rel="category tag">Uncategorized</a>										<a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2015-02-10">3 weeks ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>I just went to sunny Milton Keynes to take the 70-532 exam &#8220;Developing Microsoft Azure Solutions&#8221; it&#8217;s actually been about  <a href="~/azure-70-532/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
-					</section>
-				</div>
-
-			</article><!-- #post-21741 -->
-
-
-			<article id="post-21691" class="post-21691 post type-post status-publish format-standard has-post-thumbnail hentry category-events number3 column-4 content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/everything-i-know-about-the-development-platform-for-hololens/"><img width="312" height="280" src="~/wp-content/uploads/2015/01/hololens-312x280.jpg" class="attachment-loop wp-post-image" alt="Hololens" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/everything-i-know-about-the-development-platform-for-hololens/" rel="bookmark">Everything I know about the development platform for HoloLens</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/events/" rel="category tag">Event</a>										<a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2015-01-21">1 month ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>I know nothing, seriously. I am suprised as you. These guys and girls know how to keep a secret.</p>
-					</section>
-				</div>
-
-			</article><!-- #post-21691 -->
-
-
-			<article id="post-21581" class="post-21581 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized number4 column-4 content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/working-with-heros/"><img width="312" height="280" src="~/wp-content/uploads/2015/01/heros-312x280.jpg" class="attachment-loop wp-post-image" alt="Techdays online presenter view" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/working-with-heros/" rel="bookmark">Working with Heros</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/uncategorized/" rel="category tag">Uncategorized</a>										<a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2015-01-16">2 months ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>At Techdays online on the 5th of February I’m being joined by two of my heros: Scott Hanselman and Mike  <a href="~/working-with-heros/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
-					</section>
-				</div>
-
-			</article><!-- #post-21581 -->
-
-
-			<article id="post-21491" class="post-21491 post type-post status-publish format-standard has-post-thumbnail hentry category-events number5 column-4 content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/cordova-in-london/"><img width="312" height="280" src="~/wp-content/uploads/2015/01/cordovaLondon-312x280.jpg" class="attachment-loop wp-post-image" alt="Cordova London" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/cordova-in-london/" rel="bookmark">Cordova in London</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/events/" rel="category tag">Event</a>										<a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2015-01-09">2 months ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>Last night on the 8th of January I travelled down to London to deliver a talk on Cordova for the  <a href="~/cordova-in-london/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
-					</section>
-				</div>
-
-			</article><!-- #post-21491 -->
-
-
-			<article id="post-21241" class="post-21241 post type-post status-publish format-standard has-post-thumbnail hentry category-events number6 column-4 content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/tech-days-online-5th-of-february/"><img width="312" height="280" src="~/wp-content/uploads/2015/01/techdays2014-312x280.jpg" class="attachment-loop wp-post-image" alt="techdays2014" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/tech-days-online-5th-of-february/" rel="bookmark">Tech Days online 5th of February</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/events/" rel="category tag">Event</a>										<a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2015-01-09">2 months ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>On the 5th of February we we are broadcasting Techdays Online Developer day (you can register here) and I’m in  <a href="~/tech-days-online-5th-of-february/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
-					</section>
-				</div>
-
-			</article><!-- #post-21241 -->
-
-
-			<article id="post-21081" class="post-21081 post type-post status-publish format-standard has-post-thumbnail hentry category-events number7 column-4 content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/webcamp/"><img width="312" height="280" src="~/wp-content/uploads/2014/12/webcamplondon-312x280.jpg" class="attachment-loop wp-post-image" alt="webcamplondon" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/webcamp/" rel="bookmark">Webcamp</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/events/" rel="category tag">Event</a>										<a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2014-12-23">2 months ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>On Friday the 17th of February we welcomed delegates to Microsoft UK HQ in Reading for a full day web  <a href="~/webcamp/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
-					</section>
-				</div>
-
-			</article><!-- #post-21081 -->
-
-
-			<article id="post-21011" class="post-21011 post type-post status-publish format-standard has-post-thumbnail hentry category-events number8 column-4 content-blogs content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/roslyn-nottingham/"><img width="312" height="280" src="~/wp-content/uploads/2014/12/roslynnotts-312x280.jpg" class="attachment-loop wp-post-image" alt="roslynnotts" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/roslyn-nottingham/" rel="bookmark">Roslyn in Nottingham</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/events/" rel="category tag">Event</a>										<a href="~/blogs/" rel="tag">Blogs</a> / <a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2014-12-16">3 months ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>Last Night I travelled up to Nottingham to deliver a talk to the dotnetnotts group. I thought I was delivering  <a href="~/roslyn-nottingham/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
-					</section>
-				</div>
-
-			</article><!-- #post-21011 -->
-
-
-			<article id="post-20861" class="post-20861 post type-post status-publish format-standard has-post-thumbnail hentry category-events number9 column-4 content-news">
-
-				<figure class="postthumbnail">
-					<a href="~/understanding-your-website-through-the-ie11-f12-tools/"><img width="312" height="280" src="~/wp-content/uploads/2013/11/keyboard-312x280.jpg" class="attachment-loop wp-post-image" alt="keyboard" /></a>
-				</figure>
-
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<header>
-						<h2 class="entry-title">
-							<a href="~/understanding-your-website-through-the-ie11-f12-tools/" rel="bookmark">Understanding your website through the IE11 F12 tools</a>
-						</h2>
-						<section class="entry-meta column-4">
-							<span class="entry-category">
-								<a href="~/category/events/" rel="category tag">Event</a>										<a href="~/news/" rel="tag">News</a>
-							</span> //
-							<time class="published" datetime="2014-12-03">3 months ago</time>
-						</section>
-					</header>
-
-					<section class="entry-summary">
-						<p>On Friday I gave a talk at NDC London where I dug into the feature of the IE11 F12 developer tools.  <a href="~/understanding-your-website-through-the-ie11-f12-tools/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
-					</section>
-				</div>
-
-			</article><!-- #post-20861 -->
-
-
+		
 		</div><!-- #hfeed -->
 
 		<nav class="pagenaviwrap">

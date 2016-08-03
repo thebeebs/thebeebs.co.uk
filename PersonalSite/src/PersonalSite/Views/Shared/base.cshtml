@@ -2,6 +2,7 @@
 <html lang="en-US">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title></title>
     <link rel="stylesheet" type="text/css" media="all" href="~/style.css" />
     <link rel="stylesheet" type="text/css" media="all" href="~/css/responsive.css" />
@@ -12,19 +13,31 @@
 </head>
 
 <body class="home">
-    <nav class="menu-hamburger">
-        
-            @await Component.InvokeAsync("CategoryMenu");
-
-    </nav>
+    <nav id="menu-hamburger" class="menu-hamburger">
+        <button class="menu-toggle" id="menu-toggle" aria-expanded="false">
+            <span class="screen-reader-text">Menu</span>
+            <svg class="icon icon-menu-toggle" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100">
+                <g class="svg-menu-toggle">
+                    <path class="line line-1" d="M5 13h90v14H5z" />
+                    <path class="line line-2" d="M5 43h90v14H5z" />
+                    <path class="line line-3" d="M5 73h90v14H5z" />
+                </g>
+            </svg>
+        </button>
+        <ul class="menu wrap" id="menu-main-nav">            
+            @await Component.InvokeAsync("TypeMenu")   
+            @await Component.InvokeAsync("CategoryMenu")
+        </ul>
+</nav>
     <header id="top" role="banner">
         <nav class="menu-top-nav-wrap">
             <ul class="menu wrap" id="menu-top-nav">
                @await Component.InvokeAsync("CategoryMenu");
+               
               </ul>
         </nav>
         <div class="wrap" id="branding"> <a id="site-title" href="http://www.thebeebs.co.uk">thebeebs</a><div id="site-search"> <img style="float: right;margin-top: -40px;" src="http://www.ubelly.com/wp-content/uploads/2012/12/microsoftwhite.png"><form id="searchform" role="search" action="http://www.ubelly.com/" method="get"><div><label class="screen-reader-text" for="s">Search for:</label> <input name="s" id="s" type="text" value=""> <input id="searchsubmit" type="submit" value="Search"></div></form></div></div><div class="critterwrap"><div class="critters"> <a id="about-us" href="http://www.ubelly.com/about-us/">About Us</a></div></div> 
-        <nav class="wrap">
+        <nav class="wrap menu-main-nav-wrap">
             <ul class="menu wrap" id="menu-main-nav">
                 @await Component.InvokeAsync("TypeMenu")
             </ul>
@@ -53,6 +66,32 @@
             </div>
         </section>
     </footer>
+
+    <script>
+        // Set button to click.
+        var button = document.getElementById('menu-toggle');
+        var menu = document.getElementById('menu-hamburger');
+
+        // Click the button.
+        button.onclick = function () {
+
+            // Toggle class "opened". Set also aria-expanded to true or false.
+            if (-1 !== button.className.indexOf('opened')) {
+                button.className = button.className.replace(' opened', '');
+                menu.className = menu.className.replace(' opened', '');
+                //menu.className = "menu-hamburger";
+                button.setAttribute('aria-expanded', 'false');
+
+            } else {
+                button.className += ' opened';
+                menu.className += ' opened';
+                //menu.className = "menu-hamburger-opened";
+
+                button.setAttribute('aria-expanded', 'true');
+            }
+
+        };
+    </script>
 </body>
 </html>
 

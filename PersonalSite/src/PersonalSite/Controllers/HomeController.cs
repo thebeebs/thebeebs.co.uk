@@ -10,7 +10,8 @@ namespace PersonalSite.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var overview = Services.Content.FetchOverview();
+            return View(overview);
         }
 
         public IActionResult About()

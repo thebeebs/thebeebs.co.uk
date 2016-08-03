@@ -36,18 +36,21 @@
 
     .attachment-main {
     width:100%;
+    height:auto;
     }
     .critterwrap {
      display:none;
     }
     #branding {
-   margin-left:30%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 168px;
     }
     .menu-top-nav-wrap {
         display:none;
     }
 
-    #menu-main-nav {
+    .menu-main-nav-wrap {
       display:none;
     }
 
@@ -64,5 +67,152 @@
         padding-top:0;
     }
 
+    #hfeed article .wrapper {
+	width:100%;
+	padding: 18px 20px 42px 60px;
+	background: #333;
+	position: absolute;
+	bottom: 0;
+}
+
+/*Responsive Menu Start*/
+
+    .menu-hamburger button {
+        position:absolute;
+        top:-39px;
+    }
+    .menu-hamburger {
+    height:100%;
+    font-size: 16px;
+    padding: 0 0;
+    margin-top:39px;
+    letter-spacing: 1px;
+    line-height:100%;
+    width:0;
+    position:fixed;
+    background-color:#ff3366;
+    display:block;
+    z-index:1;
+    font-family: Folk,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    transition: all 1s;
+      
+    }
+
+    .menu-hamburger.opened {
+    height:100%;
+    font-size: 16px;
+    padding: 0 0;
+    letter-spacing: 1px;
+    line-height:20px;
+    width:80%;
+    position:fixed;
+    background-color:#ff3366;
+    display:block;
+    z-index:1;
+    font-family: Folk,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    transition: all 1s;
+    }
+    .menu-hamburger li {
+    opacity:0;
+    }
+
+    .menu-hamburger.opened li {
+        opacity:1;
+        transition: all 800ms;
+        transition-delay: 800ms;
+
+    }
+
+    button,
+input[type="button"] {
+    border: none;
+    border-radius: 0;
+    background: #ff3366;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;  
+    text-transform: uppercase;
+    transition: all 0.25s ease-in-out;
+}
+
+.menu-toggle {    
+    padding: 6px;
+}
+.menu-toggle:focus {
+    outline: thin dotted;
+    outline-offset: -2px;
+}
+
+.icon {
+    display: inline-block;
+    fill: currentColor;
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;
+    position: relative; /* Align more nicely with capital letters */
+    top: -0.0625em;
+}
+
+/* Menu toggle styles. */
+
+.icon-menu-toggle {
+    width: 2em;
+    height: 2em;
+  top: 0;
+}
+
+/* Animate menu icon (lines). */
+.svg-menu-toggle .line {
+  opacity: 1;
+  transform: rotate(0) translateY(0) translateX(0);
+  transform-origin: 1em 1em;
+  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+}
+.svg-menu-toggle .line-1 {
+  transform-origin: 1em 2.5em;
+}
+.svg-menu-toggle .line-3 {
+  transform-origin: 1em 4.5em;
+}
+
+.menu-toggle.opened .svg-menu-toggle .line-1 {
+  transform: rotate(45deg) translateY(0) translateX(0);
+}
+.menu-toggle.opened .svg-menu-toggle .line-2 {
+  opacity: 0;
+}
+.menu-toggle.opened .svg-menu-toggle .line-3 {
+  transform: rotate(-45deg) translateY(0em) translateX(0em);
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.menu-hamburger.opened .menu-item{
+
+    float:none;
+    width:90%;
+    font-size:20px;
+}
+
+
+.menu-hamburger.opened h3{    
+    padding-left:44px;   
+}
+
+
+
+#menu-main-nav li:first-child {
+    margin-left:15px;
+}
+
+
+/*Responsive Menu End*/
 }
 
