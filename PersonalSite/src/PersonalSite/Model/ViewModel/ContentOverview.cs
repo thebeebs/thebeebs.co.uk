@@ -11,6 +11,7 @@ namespace PersonalSite.ViewModels
         public List<Type> Types { get; set; }
 
         public Story Headline { get; set; }
+        public Story MonthNote { get; set; }
 
         public List <Story> Content { get; set; }
 

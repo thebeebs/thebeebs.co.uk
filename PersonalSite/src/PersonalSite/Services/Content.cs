@@ -55,6 +55,8 @@ namespace PersonalSite.Services
             overview.SecondaryHeadline.Add(overview.Headline);
             overview.SecondaryHeadline.Add(overview.Headline);
             overview.SecondaryHeadline.Add(overview.Headline);
+
+            overview.MonthNote = overview.Headline;
             return overview;
         }
     }

@@ -13,8 +13,11 @@ namespace PersonalSite.ViewModels
         public DateTime Published { get; set; }
         public List<Category> Category { get; set; }
         public List<Type> Type { get; set; }
-
-        public int CommentCount { get; set; }
+        public int CommentCount { get; set; }                
+        public string Class
+        {
+            get { return "category-mobile"; }
+        }
 
         public string RelativeTime() {
             const int SECOND = 1;

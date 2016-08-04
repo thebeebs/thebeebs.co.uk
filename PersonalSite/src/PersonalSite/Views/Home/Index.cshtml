@@ -5,7 +5,7 @@
 
 	<div class="column-8">
 		<section id="trending">
-			<article id="post-20621" class="post number1">
+			<article id="post-20621" class="post number1 @Model.Headline.Class">
 				<figure>                
                     <a href="@Model.Headline.Link">
                     <img width="644" height="300" src="@Model.Headline.ImageUrl" 
@@ -45,7 +45,7 @@
 			<div class="clearfix"></div>
             @for (int i = 0; i < Model.SecondaryHeadline.Count; i++)
             { var number = "number" + (i + 2);
-                <article id="post-19567" class="post-19567 post type-post status-publish format-standard has-post-thumbnail hentry category-comment category-web tag-promoted @number secondary content-articles">
+                <article id="post-19567" class="post-19567 post type-post status-publish format-standard has-post-thumbnail hentry @number secondary @Model.SecondaryHeadline[i].Class">
                     <div class="wrapper">
                         <div class="entry-icon"></div>
                         <h2 class="entry-title">
@@ -56,24 +56,6 @@
                 </article>
 
             }
-			<article id="post-19160" class="post-19160 post type-post status-publish format-standard has-post-thumbnail hentry category-comment tag-promoted number3 secondary content-articles">
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<h2 class="entry-title">
-						<a href="~/do-developers-have-a-god-complex/" rel="bookmark">Do developers have a God Complex?</a>
-						<a class="commentcount" href="~/do-developers-have-a-god-complex/#comments">0 <span class="screen-reader-text">Comments</span></a>
-					</h2>
-				</div>
-			</article>
-			<article id="post-8947" class="post-8947 post type-post status-publish format-standard has-post-thumbnail hentry category-web-development tag-promoted number4 secondary content-news">
-				<div class="wrapper">
-					<div class="entry-icon"></div>
-					<h2 class="entry-title">
-						<a href="~/mozilla-loves-the-cake/" rel="bookmark">Mozilla loves the cake</a>
-						<a class="commentcount" href="~/mozilla-loves-the-cake/#comments">10 <span class="screen-reader-text">Comments</span></a>
-					</h2>
-				</div>
-			</article>
 			<div class="clearfix"></div>
 		</section>
 	</div>
@@ -82,9 +64,9 @@
                 <section class="widget">
                     <div class="textwidget">
                         <section id="editors-column">
-                            <h3 class="inner">From The Editor</h3>
-                            <p class="inner">January is all about renewal – many of us use it as a chance to press the reset button, to stop procrastinating and get fit or even just get a new hair cut. It’s also the time when many companies try and work out what 2012 and beyond will bring – even though really we have no idea.</p>
-                            <div class="inner"><a id="editor-read-more" href="/web/20120217181912/http://www.ubelly.com/2012/01/editors-column-jan-2012/">Read The Editor's Column<span class="icon"></span></a> </div>
+                            <h3 class="inner">My Month Note</h3>
+                            <p class="inner">"@Model.MonthNote.Summary</p>
+                            <div class="inner"><a id="editor-read-more" href="@Model.MonthNote.Link">Read This Months Column<span class="icon"></span></a> </div>
                         </section>
                     </div>
                 </section>
