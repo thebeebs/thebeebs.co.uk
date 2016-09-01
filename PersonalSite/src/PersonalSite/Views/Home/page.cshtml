@@ -1,6 +1,10 @@
-﻿<section class="column-8" id="content">
+﻿@{
+    Layout = "base";
+}
+@model PersonalSite.ViewModels.Story
+<section class="column-8" id="content">
 	<article class="post-19160 post type-post status-publish format-standard has-post-thumbnail hentry category-comment tag-promoted content-articles" id="post-19160">
-
+    <h1>@Model.Title</h1>
 		<section class="entry-content">
 
 
@@ -8,7 +12,7 @@
 		<footer class="entry-utility">
 
 			<section class="authorbox">
-				<h3>Published by thebeebs</h3>
+				<h3>Published by @Model.Author</h3>
 				<img width="70" height="70" class="avatar avatar-70 photo" alt="" src="http://1.gravatar.com/avatar/d7b395c3c1e55fecb5eefecc3c78c4fa?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G">	<div class="authormeta">
 					<p>Martin has been a web developer since 2000 and now work for Microsoft as a technical evangelist.</p>
 				</div>

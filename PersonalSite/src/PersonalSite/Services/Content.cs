@@ -1,4 +1,5 @@
-﻿using PersonalSite.ViewModels;
+﻿using Octokit;
+using PersonalSite.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,18 @@ namespace PersonalSite.Services
 {
     public class Content
     {
+
+        public async static Task<ContentOverview> RebuildContent()
+        {
+            var overview = FetchOverview();
+            var client = new GitHubClient(new ProductHeaderValue("my-cool-app"));
+            var content = await client.Repository.Content.GetAllContents("thebeebs", "content");
+           
+            foreach (var item in content) {
+                overview.Content[0].Body = item.Content;
+            }
+            return overview;
+        }
         public static ContentOverview FetchOverview() {
             var overview = new ContentOverview();
             overview.Categories = new List<Category>();
@@ -50,6 +63,33 @@ namespace PersonalSite.Services
             overview.Content.Add(overview.Headline);
             overview.Content.Add(overview.Headline);
             overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+            overview.Content.Add(overview.Headline);
+
 
             overview.SecondaryHeadline = new List<Story>();
             overview.SecondaryHeadline.Add(overview.Headline);
@@ -57,7 +97,26 @@ namespace PersonalSite.Services
             overview.SecondaryHeadline.Add(overview.Headline);
 
             overview.MonthNote = overview.Headline;
+
+            overview.PopularPost = new List<Story>();
+            overview.PopularPost.Add(overview.Headline);
+            overview.PopularPost.Add(overview.Headline);
+            overview.PopularPost.Add(overview.Headline);
+            overview.PopularPost.Add(overview.Headline);
+            overview.PopularPost.Add(overview.Headline);
+
             return overview;
+        }
+
+        internal static object FetchPage(string page)
+        {
+            var story = new Story();
+
+            story.Author = "thebeebs";
+            story.Title = page;
+
+            return story;
+
         }
     }
 }

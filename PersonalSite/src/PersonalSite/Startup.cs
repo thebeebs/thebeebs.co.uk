@@ -53,6 +53,10 @@ namespace PersonalSite
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute("home", "",
+                    defaults: new { controller = "Home", action = "Index" });
+                routes.MapRoute("pages", "{page:required}",
+                    defaults: new { controller = "Home", action = "Page" }); 
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

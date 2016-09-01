@@ -3,30 +3,23 @@ using System.Collections.Generic;
 
 namespace PersonalSite.ViewModels
 {
-    public class Story
-    {
-        public string Link { get; set; }
-        public string ImageUrl { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string Summary { get; set; }
-        public DateTime Published { get; set; }
-        public List<Category> Category { get; set; }
-        public List<Type> Type { get; set; }
-        public int CommentCount { get; set; }                
-        public string Class
+    public static class HandyFunctions {
+        public static string TruncateAtWord(this string value, int length)
         {
-            get { return "category-mobile"; }
-        }
+            if (value == null || value.Length < length || value.IndexOf(" ", length) == -1)
+                return value;
 
-        public string RelativeTime() {
+            return value.Substring(0, value.IndexOf(" ", length));
+        }
+        public static string ToRelativeDate(this DateTime value)
+        {
             const int SECOND = 1;
             const int MINUTE = 60 * SECOND;
             const int HOUR = 60 * MINUTE;
             const int DAY = 24 * HOUR;
             const int MONTH = 30 * DAY;
 
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - Published.Ticks);
+            var ts = new TimeSpan(DateTime.UtcNow.Ticks - value.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * MINUTE)
@@ -61,6 +54,36 @@ namespace PersonalSite.ViewModels
                 return years <= 1 ? "one year ago" : years + " years ago";
             }
         }
+    }
+    public class Story
+    {
 
+        public string Link { get; set; }
+        public string LinkComments { get; set; }
+        public string ImageUrl { get; set; }
+        public string ImageAlt { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Summary { get; set; }
+
+        public string SummaryShort
+        {
+            get { return this.Summary.TruncateAtWord(140); }
+        }        
+
+        public DateTime Published { get; set; }
+        public string RelativeDate
+        {
+            get { return this.Published.ToRelativeDate(); }
+        }
+        public List<Category> Category { get; set; }
+        public List<Type> Type { get; set; }
+        public int CommentCount { get; set; }                
+        public string Class
+        {
+            get { return "category-mobile"; }
+        }
+
+        public string Body { get; internal set; }
     }
 }

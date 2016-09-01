@@ -29,7 +29,7 @@
                                 }  
 							</span>
 							- Published
-							<time class="published" datetime="@Model.Headline.Published.ToUniversalTime()">@Model.Headline.RelativeTime()</time>
+							<time class="published" datetime="@Model.Headline.Published.ToUniversalTime()">@Model.Headline.RelativeDate</time>
 							by 
                             <a class="author" href="~/author/" title="See 's Profile">@Model.Headline.Author</a>
 						</section>
@@ -65,7 +65,7 @@
                     <div class="textwidget">
                         <section id="editors-column">
                             <h3 class="inner">My Month Note</h3>
-                            <p class="inner">"@Model.MonthNote.Summary</p>
+                            <p class="inner">@Model.MonthNote.Summary</p>
                             <div class="inner"><a id="editor-read-more" href="@Model.MonthNote.Link">Read This Months Column<span class="icon"></span></a> </div>
                         </section>
                     </div>
@@ -73,32 +73,16 @@
             </div>
         <div class="widget-container widget_ubelly_trending_posts" id="ubelly_trending_posts-3">
             <section class="widget">
-                <h3 class="widget-title">Popular Posts</h3>                        <ul id="ubelly-trending-posts">
-                    <li class="comment-0">
-                        <span class="counter">1.</span>
-                        <span class="title"><a href="/web/20120218184540/http://www.ubelly.com/2012/02/learning-html5-css3/">Learning HTML5 &amp; CSS3</a></span>
-                        <a title="Comment on Learning HTML5 &amp; CSS3" class="comments" href="/web/20120218184540/http://www.ubelly.com/2012/02/learning-html5-css3/#comments">6</a>
-                    </li>
-                    <li class="comment-1">
-                        <span class="counter">2.</span>
-                        <span class="title"><a href="/web/20120218184540/http://www.ubelly.com/2012/02/vendor-prefixes-the-good-the-bad-and-the-ugly/">Vendor prefixes: the good, the bad and the ugly</a></span>
-                        <a title="Comment on Vendor prefixes: the good, the bad and the ugly" class="comments" href="/web/20120218184540/http://www.ubelly.com/2012/02/vendor-prefixes-the-good-the-bad-and-the-ugly/#comments">4</a>
-                    </li>
-                    <li class="comment-2">
-                        <span class="counter">3.</span>
-                        <span class="title"><a href="/web/20120218184540/http://www.ubelly.com/2011/12/editors-column-dec-2011/">From the editor</a></span>
-                        <a title="Comment on From the editor" class="comments" href="/web/20120218184540/http://www.ubelly.com/2011/12/editors-column-dec-2011/#comments">2</a>
-                    </li>
-                    <li class="comment-3">
-                        <span class="counter">4.</span>
-                        <span class="title"><a href="/web/20120218184540/http://www.ubelly.com/2011/12/design-trends-of-2012/">Design Trends of 2012</a></span>
-                        <a title="Comment on Design Trends of 2012" class="comments" href="/web/20120218184540/http://www.ubelly.com/2011/12/design-trends-of-2012/#comments">2</a>
-                    </li>
-                    <li class="comment-4">
-                        <span class="counter">5.</span>
-                        <span class="title"><a href="/web/20120218184540/http://www.ubelly.com/2011/12/memetastic-2011/">Memetastic 2011</a></span>
-                        <a title="Comment on Memetastic 2011" class="comments" href="/web/20120218184540/http://www.ubelly.com/2011/12/memetastic-2011/#comments">2</a>
-                    </li>
+                <h3 class="widget-title">Popular Posts</h3>                        
+                <ul id="ubelly-trending-posts">
+                    @for (int i = 0; i < Model.PopularPost.Count; i++)
+                    {
+                        <li class="comment-@i">
+                            <span class="counter">@(i+1).</span>
+                            <span class="title"><a href="@Model.PopularPost[i].Link">@Model.PopularPost[i].Title</a></span>
+                            <a title="@Model.PopularPost[i].Title" class="comments" href="@Model.PopularPost[i].LinkComments">@Model.PopularPost[i].CommentCount</a>
+                        </li>  
+                    }
                 </ul>
             </section>
         </div>
@@ -112,36 +96,37 @@
 	<div class="grid">
 
 		<div id="hfeed">
-        @for (int i = 0; i < Model.Content.Count; i++)
+        @for (int i = 0; i < Model.CurrentContent.Count; i++)
         { var number = "number" + (i + 1);
-
         
-			<article id="post-21781" class="post-21781 post type-post status-publish format-standard has-post-thumbnail hentry category-cloud @number column-4 content-tutorials">
-
+			<article  class="post type-post status-publish format-standard has-post-thumbnail hentry category-cloud @number column-4 content-tutorials">
 				<figure class="postthumbnail">
-					<a href="~/21781/"><img width="312" height="280" src="~/wp-content/uploads/2014/10/windows8-312x280.jpg" class="attachment-loop wp-post-image" alt="Windows 8" /></a>
+					<a href="@Model.Content[i].Link"><img width="312" height="280" src="@Model.Content[i].ImageUrl" class="attachment-loop wp-post-image" alt="@Model.Content[i].ImageAlt" /></a>
 				</figure>
 
 				<div class="wrapper">
 					<div class="entry-icon"></div>
 					<header>
 						<h2 class="entry-title">
-							<a href="~/21781/" rel="bookmark">Fix: Failed to delete a storage account</a>
+							<a href="@Model.Content[i].Link" rel="bookmark">@Model.Content[i].Title</a>
 						</h2>
 						<section class="entry-meta column-4">
 							<span class="entry-category">
-								<a href="~/category/cloud/" rel="category tag">Cloud</a>										<a href="~/tutorials/" rel="tag">Tutorials</a>
+                                @foreach (var cat in @Model.Content[i].Category)
+                                {
+                                    <a href="@cat.Link" rel="category tag">@cat.Name</a>
+                                }                            
 							</span> //
-							<time class="published" datetime="2015-02-12">3 weeks ago</time>
+							<time class="published" datetime="@Model.Content[i].Published">@Model.Content[i].RelativeDate</time>
 						</section>
 					</header>
 
 					<section class="entry-summary">
-						<p>Had a problem today where I got an error &#8220;Failed to delete a storage account&#8221; &#8221; Ensure these images(s) and /or  <a href="~/21781/" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
+						<p>@Model.Content[i].SummaryShort <a href="@Model.Content[i].Link" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
 					</section>
 				</div>
 
-			</article><!-- #post-21781 -->
+			</article>
         }
 
 		
@@ -150,8 +135,19 @@
 		<nav class="pagenaviwrap">
 			<div class="critters3"></div>
 			<div class='wp-pagenavi'>
-				<span class='pages'>Page 1 of 11</span><span class='current'>1</span><a class="page larger" href="~/page/2/">2</a><a class="page larger" href="~/page/3/">3</a><a class="page larger" href="~/page/4/">4</a><a class="page larger" href="~/page/5/">5</a><span class='extend'>...</span><a class="larger page" href="~/page/10/">10</a><span class='extend'>...</span><a class="nextpostslink" rel="next" href="~/page/2/">»</a><a class="last" href="~/page/11/">Last »</a>
-			</div>
+				<span class='pages'>Page @Model.PageNumber of @Model.PageCount</span>
+                @for (int i = 1; i <= @Model.PageCount; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <span class='current'>@Model.PageNumber</span>
+                    }
+                    else
+                    {
+                        <a class="page larger" href="~/page/@i/">@i</a>
+                    }
+                }   
+            </div>
 		</nav>
 
 	</div>

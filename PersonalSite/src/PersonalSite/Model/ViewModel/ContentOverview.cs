@@ -14,14 +14,30 @@ namespace PersonalSite.ViewModels
         public Story MonthNote { get; set; }
 
         public List <Story> Content { get; set; }
+        public List<Story> CurrentContent
+        {
+            get { return Content.Take<Story>(9).ToList(); }
+        }
 
         public List<Story> SecondaryHeadline { get; set; }
 
-        
+        public List<Story> PopularPost { get; set; }
+
+        public int PageNumber
+        {
+            get { return 1; }
+        }
+        public int PageCount
+        {
+            get { return (Content.Count / 9); }
+        }
+
+
     }
 
     public class Category {  
         public string Name { get; set; }
+        public string Link { get; set; }
     }
     public class Type
     {

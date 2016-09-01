@@ -8,10 +8,16 @@ namespace PersonalSite.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var overview = Services.Content.FetchOverview();
+            var overview = await Services.Content.RebuildContent();
             return View(overview);
+        }
+
+        public IActionResult Page(string page)
+        {
+            var p = Services.Content.FetchPage(page);
+            return View(p);
         }
 
         public IActionResult About()
