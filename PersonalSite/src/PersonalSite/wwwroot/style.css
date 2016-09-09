@@ -3284,52 +3284,33 @@ ul.videotemplatepage li br {
 	margin-bottom: 0px;
 }
 
-/*----New styes for app developer pages. Added by Luke on 10 Sep 2012 ----*/
+/*----Added by Martin on 8 Sep 2016 ----*/
 
-	.leftside {
-		display: block;
-		float: left;
-		width: 300px;
-		padding-right: 10px;
-		text-align: right;
-	}
-	
-	.rightside {
-		display: block;
-		float: left;
-		width: 300px;
-		padding-left: 10px;
-		text-align: left;
-		padding-bottom: 50px;	
-	}
-	
-	.leftside div, .rightside div {
-		display: block;
-		width: 100%;
-		padding-bottom: 5px;
-	}
-	
-	.comparetitle { min-height: 60px; }
-	
-	.comparetitle h2 {
-		font-family: "Segoe UI", Helvetica, Arial;
-		font-weight: normal;
-		font-size: 1.5em; 
-		text-align: left;
-		padding: 0 0 0 20px;
-		margin: 0;
-	}
+.freshness {
+    max-width: 40px;
+	min-width: 14px;
+	text-align: center;
+	height: 19px;
+	padding: 7px 7px 2px 7px;
+    margin-right:5px;
+	font-size: 14px;
+	line-height:14px;
+	font-family: Folk, 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-radius: 5px;
+	color: #fff;
+	background: #90B231;
+    float:left;
+}	
 
-	#why {
-		background: #ededed;
-		padding: 15px 10px;
-		border-radius: 10px;
-		margin-bottom: 15px;
-	}
+.stale {
+	
+	background: #ff3366;
 
-	.icing {
-		display: inline-block;
-		width: 30%;
-		margin-right: 15px;
-		vertical-align: top;
-	}
+}	
+.update {
+	max-width: 90px;
+	background: #228EC4;
+
+}	

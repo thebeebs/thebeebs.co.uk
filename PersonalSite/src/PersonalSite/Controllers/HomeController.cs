@@ -10,7 +10,7 @@ namespace PersonalSite.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            var overview = await Services.Content.RebuildContent();
+            var overview = Services.Content.FetchOverview();
             return View(overview);
         }
 

@@ -10,18 +10,7 @@ namespace PersonalSite.Services
     public class Content
     {
 
-        public async static Task<ContentOverview> RebuildContent()
-        {
-            var overview = FetchOverview();
-            var client = new GitHubClient(new ProductHeaderValue("my-cool-app"));
-            var content = await client.Repository.Content.GetAllContents("thebeebs", "content");
-           
-            foreach (var item in content) {
-                overview.Content[0].Body = item.Content;
-            }
-            return overview;
-        }
-        public static ContentOverview FetchOverview() {
+       public static ContentOverview FetchOverview() {
             var overview = new ContentOverview();
             overview.Categories = new List<Category>();
             overview.Categories.Add(new Category { Name = "Web" });
