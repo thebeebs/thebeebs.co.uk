@@ -79,13 +79,12 @@
 
     .menu-hamburger button {
         position:absolute;
-        top:-39px;
+        top:0px;
     }
     .menu-hamburger {
     height:100%;
     font-size: 16px;
     padding: 0 0;
-    margin-top:39px;
     letter-spacing: 1px;
     line-height:100%;
     width:0;
@@ -104,7 +103,7 @@
     padding: 0 0;
     letter-spacing: 1px;
     line-height:20px;
-    width:80%;
+    width:100%;
     position:fixed;
     background-color:#ff3366;
     display:block;
