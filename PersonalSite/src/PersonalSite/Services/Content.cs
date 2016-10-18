@@ -116,37 +116,35 @@ namespace PersonalSite.Services
 
             //            this stuff is not the header";
 
-            if (!str.StartsWith("---")) return null;
+            if (!str.StartsWith("---")) throw new FormatException(); 
 
-            if (!(str.LastIndexOf("---") > 0)) return null;
+            if (!(str.LastIndexOf("---") > 0)) throw new FormatException(); 
 
             StringReader sr = new StringReader(str);
             sr.ReadLine();
-
-
-
+            
             var title = sr.ReadLine();
             var position = title.IndexOf(":");
 
             title = title.Substring(position + 1, (title.Length - position) -1);
             title = title.Trim();
             char[] chArr = { '\''};
+            char[] hyp = { '-' };
             title = title.Trim(chArr);
 
             // Start Extracting Authors
             var auth = sr.ReadLine();
             if (!auth.Contains("authors:")) throw new FormatException();
-            var firstAuth = sr.ReadLine();
-            firstAuth = title.Trim(chArr);
-            var chars = sr.Peek();
-
-            var nextLine = sr.ReadLine();
+            var authorFirst = sr.ReadLine().Trim();
+            authorFirst = authorFirst.Trim(hyp).Trim();
+            
+            var nextLine = sr.ReadLine().Trim();
             
             // It's another author
             if (nextLine.StartsWith("-"))
             {
-                nextLine = nextLine.Trim(chArr).Trim();
-                firstAuth = $"{firstAuth}, {nextLine}";
+                nextLine = nextLine.Trim(hyp).Trim();
+                authorFirst = $"{authorFirst}, {nextLine}";
                 nextLine = sr.ReadLine();
             }
 
@@ -154,7 +152,7 @@ namespace PersonalSite.Services
             //var intro = nextLine.Substring(position + 1, (title.Length - position) - 1).Trim().Trim(chArr);
 
 
-            return new Story() { Title = title, Author = firstAuth };
+            return new Story() { Title = title, Author = authorFirst };
         }
 
         public static string BaseURL() {
