@@ -134,7 +134,7 @@ namespace PersonalSite.Services
 
             // Start Extracting Authors
             var auth = sr.ReadLine();
-            if (!auth.Contains("authors:")) throw new FormatException();
+            if (!auth.ToLower().Contains("authors")) throw new FormatException();
             var authorFirst = sr.ReadLine().Trim();
             authorFirst = authorFirst.Trim(hyp).Trim();
             
@@ -148,11 +148,35 @@ namespace PersonalSite.Services
                 nextLine = sr.ReadLine();
             }
 
-            //position = nextLine.IndexOf(":");
-            //var intro = nextLine.Substring(position + 1, (title.Length - position) - 1).Trim().Trim(chArr);
+            // Extract the Intro
+            position = nextLine.IndexOf(":");
+            var intro = nextLine.Substring(position + 1, (nextLine.Length - position) - 1).Trim().Trim(chArr);
+
+            //Extract the Types
+            nextLine = sr.ReadLine();
+            if (!(nextLine.ToLower().Contains("types"))) throw new FormatException();
+            nextLine = sr.ReadLine();
+            var types = new List<ViewModels.Type>();
+            do
+            {
+                types.Add(new ViewModels.Type() { Name = nextLine.Trim().Trim(hyp).Trim() });
+                nextLine = sr.ReadLine();
+            } while (!nextLine.Contains(":"));
+
+            //Extract the Categories
+            nextLine = sr.ReadLine();
+            if (!(nextLine.ToLower().Contains("types"))) throw new FormatException();
+            nextLine = sr.ReadLine();
+            var cats = new List<ViewModels.Category>();
+            do
+            {
+                cats.Add(new ViewModels.Category() { Name = nextLine.Trim().Trim(hyp).Trim() });
+                nextLine = sr.ReadLine();
+            } while (!nextLine.Contains("---"));
 
 
-            return new Story() { Title = title, Author = authorFirst };
+
+            return new Story() { Title = title, Author = authorFirst, Summary = intro, Type = types    };
         }
 
         public static string BaseURL() {

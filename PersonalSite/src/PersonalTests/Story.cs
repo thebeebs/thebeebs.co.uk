@@ -99,6 +99,32 @@ namespace PersonalTests
             Story actual = PersonalSite.Services.Content.ExtractHeader(str);
             Assert.AreEqual("5 things To Get Compatible With Microsoft Edge", actual.Title);
             Assert.AreEqual("thebeebs, martinkearn", actual.Author);
+            Assert.AreEqual("Here are 5 ways in which you can make sure your site rock on Edge.", actual.Summary);
+            Assert.AreEqual("opinion", actual.Type[0].Name);
+            Assert.AreEqual("web", actual.Category[0].Name);
+            Assert.AreEqual("browsers", actual.Category[1].Name);
+        }
+
+        [TestMethod]
+        public void ExtractHeaderOneAuthor()
+        {
+            var str = @"---
+                        title: '5 things To Get Compatible With Microsoft Edge'
+                        authors:
+                        -thebeebs
+                        intro: 'Here are 5 ways in which you can make sure your site rock on Edge.'
+                        types:
+                        -opinion
+                        categories:
+                        -web
+                        - browsers
+                        ---
+                        
+                        this stuff is not the header";
+
+            Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+            Assert.AreEqual("5 things To Get Compatible With Microsoft Edge", actual.Title);
+            Assert.AreEqual("thebeebs", actual.Author);
         }
 
     }
