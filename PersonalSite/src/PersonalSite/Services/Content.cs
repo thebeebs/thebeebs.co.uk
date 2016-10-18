@@ -2,6 +2,7 @@
 using PersonalSite.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -97,6 +98,65 @@ namespace PersonalSite.Services
             return overview;
         }
 
+        public static Story ExtractHeader(string str)
+        {
+
+            //var str = @"---
+            //            title: '5 things To Get Compatible With Microsoft Edge'
+            //            authors:
+            //            -thebeebs
+            //            - martinkearn
+            //            intro: 'Here are 5 ways in which you can make sure your site rock on Edge.'
+            //            types:
+            //            -opinion
+            //            categories:
+            //            -web
+            //            - browsers
+            //            ---
+
+            //            this stuff is not the header";
+
+            if (!str.StartsWith("---")) return null;
+
+            if (!(str.LastIndexOf("---") > 0)) return null;
+
+            StringReader sr = new StringReader(str);
+            sr.ReadLine();
+
+
+
+            var title = sr.ReadLine();
+            var position = title.IndexOf(":");
+
+            title = title.Substring(position + 1, (title.Length - position) -1);
+            title = title.Trim();
+            char[] chArr = { '\''};
+            title = title.Trim(chArr);
+
+            // Start Extracting Authors
+            var auth = sr.ReadLine();
+            if (!auth.Contains("authors:")) throw new FormatException();
+            var firstAuth = sr.ReadLine();
+            firstAuth = title.Trim(chArr);
+            var chars = sr.Peek();
+
+            var nextLine = sr.ReadLine();
+            
+            // It's another author
+            if (nextLine.StartsWith("-"))
+            {
+                nextLine = nextLine.Trim(chArr).Trim();
+                firstAuth = $"{firstAuth}, {nextLine}";
+                nextLine = sr.ReadLine();
+            }
+
+            //position = nextLine.IndexOf(":");
+            //var intro = nextLine.Substring(position + 1, (title.Length - position) - 1).Trim().Trim(chArr);
+
+
+            return new Story() { Title = title, Author = firstAuth };
+        }
+
         public static string BaseURL() {
             return "thebeebs.co.uk";
         }
@@ -128,10 +188,10 @@ namespace PersonalSite.Services
             return CommonMark.CommonMarkConverter.Convert(markdown);            
         }
 
-        public static string GetHeader(string str) {
+        //public static string GetHeader(string str) {
             
             
 
-        }
+        //}
     }
 }

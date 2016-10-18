@@ -48,12 +48,38 @@ namespace PersonalTests
 
             var result = PersonalSite.Services.Content.ConvertMarkdown(overview.Result);
 
-            Assert.AreEqual("Hiya is", result);
+            Assert.AreEqual("<hr />", result.Substring(0,6));
             
         }
 
         [TestMethod]
-        public void GetHeader()
+        public void ExtractHeaderSendOnlyOpen()
+        {
+            var str = @"---                        
+                        
+                        this stuff is not the header";
+
+            Assert.ThrowsException<System.FormatException>(() =>
+            {
+                Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+            });
+        }
+
+        [TestMethod]
+        public void ExtractHeaderSendBoth()
+        {
+            var str = @"---
+                        ---
+                        
+                        this stuff is not the header";
+            Assert.ThrowsException<System.FormatException>(() =>
+            {
+                Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+            }); 
+        }
+
+        [TestMethod]
+        public void ExtractHeader()
         {
             var str = @"---
                         title: '5 things To Get Compatible With Microsoft Edge'
@@ -69,6 +95,10 @@ namespace PersonalTests
                         ---
                         
                         this stuff is not the header";
+        
+            Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+            Assert.AreEqual("5 things To Get Compatible With Microsoft Edge", actual.Title);
+            Assert.AreEqual("thebeebs, martinkearn", actual.Author);
         }
 
     }
