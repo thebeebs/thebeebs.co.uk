@@ -2,7 +2,7 @@
 using PersonalSite.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PersonalSite.Services
@@ -37,8 +37,8 @@ namespace PersonalSite.Services
             overview.Headline.Category.Add(new Category { Name = "Web" });
             overview.Headline.Type = new List<ViewModels.Type>();
             overview.Headline.Type.Add(new ViewModels.Type { Name = "Opinion", Symbol = "news" });
-            overview.Headline.ImageUrl = "/wp-content/uploads/2014/11/phone.jpg";
-            overview.Headline.Link = "http://localhost:39016/why-imessgae-will-never-beat-whatsapp";
+            overview.Headline.ImageUrl = $"{BaseURL()}/wp-content/uploads/2014/11/phone.jpg";
+            overview.Headline.Link = $"{BaseURL()}/why-imessgae-will-never-beat-whatsapp";
             overview.Headline.Published = DateTime.Now.AddHours(-4);
             overview.Headline.Summary = "Most of us have experienced some form of 'platform shut out' - when you want to share something with a friend but can't because they use a different device from you and the app isn't available on that device. This problem is particularly acute when it comes to messenger apps, but is common in many apps with sharing or collaboration functionality. WhatsApp and iMessage illustrate the two approaches that native applications developers take. iMessage works... ";
             overview.Headline.Title = "Why iMessage will never beat WhatsApp";
@@ -97,7 +97,11 @@ namespace PersonalSite.Services
             return overview;
         }
 
-        internal static object FetchPage(string page)
+        public static string BaseURL() {
+            return "thebeebs.co.uk";
+        }
+
+        internal static Story FetchPage(string page)
         {
             var story = new Story();
 
@@ -105,6 +109,28 @@ namespace PersonalSite.Services
             story.Title = page;
 
             return story;
+
+        }
+
+        public async static Task<string> FetchStory(string url)
+        {
+            // Get A URL and Convert to string
+          
+            var client = new HttpClient();
+            var item = await client.GetAsync(url);
+            var str = await item.Content.ReadAsStringAsync();
+            return str;
+        }
+
+        public static string ConvertMarkdown(string markdown)
+        {
+            
+            return CommonMark.CommonMarkConverter.Convert(markdown);            
+        }
+
+        public static string GetHeader(string str) {
+            
+            
 
         }
     }
