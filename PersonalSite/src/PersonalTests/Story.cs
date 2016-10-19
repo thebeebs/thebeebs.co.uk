@@ -103,6 +103,9 @@ namespace PersonalTests
             Assert.AreEqual("opinion", actual.Type[0].Name);
             Assert.AreEqual("web", actual.Category[0].Name);
             Assert.AreEqual("browsers", actual.Category[1].Name);
+            Assert.IsTrue(actual.BodyMarkDown.StartsWith("this stuff is not the header"),"Actual Markdownbody:" + actual.BodyMarkDown);
+            Assert.IsTrue(actual.Body.StartsWith("<p>this stuff is not the header</p>"), "Actual Body:" + actual.Body);
+
         }
 
         [TestMethod]

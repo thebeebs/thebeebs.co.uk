@@ -173,7 +173,10 @@ namespace PersonalSite.Services
                 nextLine = sr.ReadLine();
             } while (!nextLine.Contains("---"));
 
-            var bodyMarkDown = sr.ReadToEnd();
+            //Should be a line space
+            sr.ReadLine();
+
+            var bodyMarkDown = sr.ReadToEnd().Trim();
 
             return new Story() { Title = title, Author = authorFirst, Summary = intro, Type = types, Category = cats, BodyMarkDown = bodyMarkDown };
         }
@@ -208,11 +211,5 @@ namespace PersonalSite.Services
             
             return CommonMark.CommonMarkConverter.Convert(markdown);            
         }
-
-        //public static string GetHeader(string str) {
-            
-            
-
-        //}
     }
 }
