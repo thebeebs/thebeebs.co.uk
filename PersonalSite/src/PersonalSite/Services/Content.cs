@@ -116,9 +116,9 @@ namespace PersonalSite.Services
 
             //            this stuff is not the header";
 
-            if (!str.StartsWith("---")) throw new FormatException(); 
+            if (!str.StartsWith("---")) throw new FormatException("No --- at start"); 
 
-            if (!(str.LastIndexOf("---") > 0)) throw new FormatException(); 
+            if (!(str.LastIndexOf("---") > 0)) throw new FormatException("No --- at closing");
 
             StringReader sr = new StringReader(str);
             sr.ReadLine();
@@ -134,7 +134,7 @@ namespace PersonalSite.Services
 
             // Start Extracting Authors
             var auth = sr.ReadLine();
-            if (!auth.ToLower().Contains("authors")) throw new FormatException();
+            if (!auth.ToLower().Contains("authors")) throw new FormatException("No authors on expected line"); 
             var authorFirst = sr.ReadLine().Trim();
             authorFirst = authorFirst.Trim(hyp).Trim();
             
@@ -154,7 +154,7 @@ namespace PersonalSite.Services
 
             //Extract the Types
             nextLine = sr.ReadLine();
-            if (!(nextLine.ToLower().Contains("types"))) throw new FormatException();
+            if (!(nextLine.ToLower().Contains("types"))) throw new FormatException("Item types not in expected place");
             nextLine = sr.ReadLine();
             var types = new List<ViewModels.Type>();
             do
@@ -164,8 +164,7 @@ namespace PersonalSite.Services
             } while (!nextLine.Contains(":"));
 
             //Extract the Categories
-            nextLine = sr.ReadLine();
-            if (!(nextLine.ToLower().Contains("types"))) throw new FormatException();
+            if (!(nextLine.ToLower().Contains("categories"))) throw new FormatException("Item categories not in expected place");
             nextLine = sr.ReadLine();
             var cats = new List<ViewModels.Category>();
             do
@@ -176,7 +175,7 @@ namespace PersonalSite.Services
 
 
 
-            return new Story() { Title = title, Author = authorFirst, Summary = intro, Type = types    };
+            return new Story() { Title = title, Author = authorFirst, Summary = intro, Type = types, Category = cats };
         }
 
         public static string BaseURL() {
