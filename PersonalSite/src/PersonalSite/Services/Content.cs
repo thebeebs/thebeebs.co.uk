@@ -1,4 +1,5 @@
-﻿using Octokit;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Octokit;
 using PersonalSite.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,14 @@ namespace PersonalSite.Services
 {
     public class Content
     {
+        public Content(IMemoryCache memoryCache) {
+            var story = new Story();
+            story.Author = "thebeebs";
+            story.Title = "This was loaded on services start up";
+            memoryCache.Set("why-imessgae-will-never-beat-whatsapp", story);
+        }
 
-       public static ContentOverview FetchOverview() {
+        public static ContentOverview FetchOverview() {
             var overview = new ContentOverview();
             overview.Categories = new List<Category>();
             overview.Categories.Add(new Category { Name = "Web" });
@@ -188,7 +195,6 @@ namespace PersonalSite.Services
         internal static Story FetchPage(string page)
         {
             var story = new Story();
-
             story.Author = "thebeebs";
             story.Title = page;
 
