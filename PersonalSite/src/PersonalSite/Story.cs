@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalSite.Services;
+using System;
 using System.Collections.Generic;
 
 namespace PersonalSite.ViewModels
@@ -84,6 +85,16 @@ namespace PersonalSite.ViewModels
             get { return "category-mobile"; }
         }
 
-        public string Body { get; internal set; }
+        private string body;
+
+        public string Body
+        {
+            get {
+                return body ?? Content.ConvertMarkdown(this.BodyMarkDown);
+              }
+            set { body = value; }
+        }
+
+        public string BodyMarkDown { get; internal set; }
     }
 }

@@ -98,7 +98,7 @@ namespace PersonalSite.Services
             return overview;
         }
 
-        public static Story ExtractHeader(string str)
+        public static Story ExtractHeaderAndBody(string str)
         {
 
             //var str = @"---
@@ -173,9 +173,9 @@ namespace PersonalSite.Services
                 nextLine = sr.ReadLine();
             } while (!nextLine.Contains("---"));
 
+            var bodyMarkDown = sr.ReadToEnd();
 
-
-            return new Story() { Title = title, Author = authorFirst, Summary = intro, Type = types, Category = cats };
+            return new Story() { Title = title, Author = authorFirst, Summary = intro, Type = types, Category = cats, BodyMarkDown = bodyMarkDown };
         }
 
         public static string BaseURL() {

@@ -61,7 +61,7 @@ namespace PersonalTests
 
             Assert.ThrowsException<System.FormatException>(() =>
             {
-                Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+                Story actual = PersonalSite.Services.Content.ExtractHeaderAndBody(str);
             });
         }
 
@@ -74,7 +74,7 @@ namespace PersonalTests
                         this stuff is not the header";
             Assert.ThrowsException<System.FormatException>(() =>
             {
-                Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+                Story actual = PersonalSite.Services.Content.ExtractHeaderAndBody(str);
             }); 
         }
 
@@ -96,7 +96,7 @@ namespace PersonalTests
                         
                         this stuff is not the header";
         
-            Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+            Story actual = PersonalSite.Services.Content.ExtractHeaderAndBody(str);
             Assert.AreEqual("5 things To Get Compatible With Microsoft Edge", actual.Title);
             Assert.AreEqual("thebeebs, martinkearn", actual.Author);
             Assert.AreEqual("Here are 5 ways in which you can make sure your site rock on Edge.", actual.Summary);
@@ -122,7 +122,7 @@ namespace PersonalTests
                         
                         this stuff is not the header";
 
-            Story actual = PersonalSite.Services.Content.ExtractHeader(str);
+            Story actual = PersonalSite.Services.Content.ExtractHeaderAndBody(str);
             Assert.AreEqual("5 things To Get Compatible With Microsoft Edge", actual.Title);
             Assert.AreEqual("thebeebs", actual.Author);
         }
