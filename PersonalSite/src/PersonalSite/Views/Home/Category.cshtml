@@ -1,0 +1,154 @@
+﻿@{
+    Layout = "base";
+}
+@model PersonalSite.ViewModels.ContentOverview
+
+	<div class="column-8">
+		<section id="trending">
+			<article id="post-20621" class="post number1 @Model.Headline.Class">
+				<figure>                
+                    <a href="@Model.Headline.Link">
+                    <img width="644" height="300" src="@Model.Headline.ImageUrl" 
+                         class="attachment-main wp-post-image" alt="phone" />                 
+                    </a>
+                </figure>
+				<div class="wrapper">
+					<div class="contentwrap">
+						<h2 class="entry-title">
+                            <span class="entry-icon"></span>
+                            <a href="@Model.Headline.Link" 
+                               rel="bookmark">@Model.Headline.Title</a>
+                        </h2>
+						<section class="post-meta">
+							<span class="entry-category">
+                                @foreach (var cat in Model.Headline.Category)
+                                {
+                                    <a href="@cat.Name" rel="category tag">
+                                        @cat.Name
+                                    </a>
+                                }  
+							</span>
+							- Published
+							<time class="published" datetime="@Model.Headline.Published.ToUniversalTime()">@Model.Headline.RelativeDate</time>
+							by 
+                            <a class="author" href="~/author/" title="See 's Profile">@Model.Headline.Author</a>
+						</section>
+						<section class="entry-summary">
+							@Model.Headline.Summary
+						</section>
+						<section class="entry-meta">
+						<a class="commentcount" href="~/why-imessage-will-never-beat-whatsapp/#comments">0 <span class="screen-reader-text">Comments</span></a>
+						</section>
+					</div>
+				</div>
+			</article>
+			<div class="clearfix"></div>
+            @for (int i = 0; i < Model.SecondaryHeadline.Count; i++)
+            { var number = "number" + (i + 2);
+                <article id="post-19567" class="post-19567 post type-post status-publish format-standard has-post-thumbnail hentry @number secondary @Model.SecondaryHeadline[i].Class">
+                    <div class="wrapper">
+                        <div class="entry-icon"></div>
+                        <h2 class="entry-title">
+                            <a href="@Model.SecondaryHeadline[i].Link" rel="bookmark">@Model.SecondaryHeadline[i].Title</a>
+                            <a class="commentcount" href="@Model.SecondaryHeadline[i].Link/#comments">@Model.SecondaryHeadline[i].CommentCount <span class="screen-reader-text">Comments</span></a>
+                        </h2>
+                    </div>
+                </article>
+
+            }
+			<div class="clearfix"></div>
+		</section>
+	</div>
+	<aside class="column-4 last">
+        <div class="widget-container widget_text" id="text-3">
+                <section class="widget">
+                    <div class="textwidget">
+                        <section id="editors-column">
+                            <h3 class="inner">My Month Note</h3>
+                            <p class="inner">@Model.MonthNote.Summary</p>
+                            <div class="inner"><a id="editor-read-more" href="@Model.MonthNote.Link">Read This Months Column<span class="icon"></span></a> </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        <div class="widget-container widget_ubelly_trending_posts" id="ubelly_trending_posts-3">
+            <section class="widget">
+                <h3 class="widget-title">Popular Posts</h3>                        
+                <ul id="ubelly-trending-posts">
+                    @for (int i = 0; i < Model.PopularPost.Count; i++)
+                    {
+                        <li class="comment-@i">
+                            <span class="counter">@(i+1).</span>
+                            <span class="title"><a href="@Model.PopularPost[i].Link">@Model.PopularPost[i].Title</a></span>
+                            <a title="@Model.PopularPost[i].Title" class="comments" href="@Model.PopularPost[i].LinkComments">@Model.PopularPost[i].CommentCount</a>
+                        </li>  
+                    }
+                </ul>
+            </section>
+        </div>
+		<div id="adrotate_widgets-5" class="widget-container widget_adrotate_widgets"><section class="widget"><!-- Either there are no banners, they are disabled or none qualified for this location! --></section></div>
+	</aside>
+	<div class="clearfix"></div>
+	<nav class="post-sorter">
+		<div class="critters2"></div>
+		<h2>Latest Posts</h2>
+	</nav>
+	<div class="grid">
+
+		<div id="hfeed">
+        @for (int i = 0; i < Model.CurrentContent.Count; i++)
+        { var number = "number" + (i + 1);
+        
+			<article  class="post type-post status-publish format-standard has-post-thumbnail hentry category-cloud @number column-4 content-tutorials">
+				<figure class="postthumbnail">
+					<a href="@Model.Content[i].Link"><img width="312" height="280" src="@Model.Content[i].ImageUrl" class="attachment-loop wp-post-image" alt="@Model.Content[i].ImageAlt" /></a>
+				</figure>
+
+				<div class="wrapper">
+					<div class="entry-icon"></div>
+					<header>
+						<h2 class="entry-title">
+							<a href="@Model.Content[i].Link" rel="bookmark">@Model.Content[i].Title</a>
+						</h2>
+						<section class="entry-meta column-4">
+							<span class="entry-category">
+                                @foreach (var cat in @Model.Content[i].Category)
+                                {
+                                    <a href="@cat.Link" rel="category tag">@cat.Name</a>
+                                }                            
+							</span> //
+							<time class="published" datetime="@Model.Content[i].Published">@Model.Content[i].RelativeDate</time>
+						</section>
+					</header>
+
+					<section class="entry-summary">
+						<p>@Model.Content[i].SummaryShort <a href="@Model.Content[i].Link" class="more-link"><span class="more-icon"></span><span class="screen-reader-text">Continue Reading</span></a></p>
+					</section>
+				</div>
+
+			</article>
+        }
+
+		
+		</div><!-- #hfeed -->
+
+		<nav class="pagenaviwrap">
+			<div class="critters3"></div>
+			<div class='wp-pagenavi'>
+				<span class='pages'>Page @Model.PageNumber of @Model.PageCount</span>
+                @for (int i = 1; i <= @Model.PageCount; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <span class='current'>@Model.PageNumber</span>
+                    }
+                    else
+                    {
+                        <a class="page larger" href="~/page/@i/">@i</a>
+                    }
+                }   
+            </div>
+		</nav>
+
+	</div>
+
